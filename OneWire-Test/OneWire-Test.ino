@@ -1,9 +1,15 @@
-void setup() {
-  // put your setup code here, to run once:
+#define Tp 50 //digial tempurature data pin number
 
+void setup() {
+
+    Serial.begin(115200);
+    pinmode(Tp, INPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
 
+    Tdat = digialRead(Tp);
+    Serial.println(Tdat);
+    delay(100);
+    }
 }
