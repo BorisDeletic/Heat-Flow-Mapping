@@ -6,6 +6,7 @@ void setup() {
     pinmode(Tp, INPUT);
 }
 
+
 void loop() {
 
     Tdat = digialRead(Tp);
