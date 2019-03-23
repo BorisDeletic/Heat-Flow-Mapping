@@ -1,0 +1,13 @@
+vertical cable interval length: 0.80 m
+horizonal cable interval length: 3.00 m 
+
+Cat5e wire pairs
+Br = gnd
+WBr = data
+O = vpp
+WO = none
+G = none
+WG = none
+Bl = none
+WBl = none
+
