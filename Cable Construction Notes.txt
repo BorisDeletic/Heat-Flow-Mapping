@@ -4,10 +4,11 @@ horizonal cable interval length: 3.00 m
 Cat5e wire pairs
 Br = gnd
 WBr = data
-O = vpp
+O = vcc
 WO = none
 G = none
 WG = none
 Bl = none
 WBl = none
 
+Strip 2cm - 2.5cm of cat5e coating
