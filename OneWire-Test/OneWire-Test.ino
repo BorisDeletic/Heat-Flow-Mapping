@@ -7,6 +7,7 @@ void setup() {
 }
 
 
+
 void loop() {
 
     Tdat = digialRead(Tp);
