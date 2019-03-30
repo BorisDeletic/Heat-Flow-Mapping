@@ -1,0 +1,19 @@
+Pin Connections:
+
+Mega                   Mini
+reset-gnd              -----
+5 volt                 vcc
+gnd                    gnd
+tx                     tx
+rx                     rx
+
+
+Settings:
+
+Board: Arduino Pro or Pro mini
+Processor: ATMega168 (5V 16MHz)
+Programmer: AVRISP
+
+Procedure:
+
+Hit the Reset Button on the Promini one the filesize is shown in the IDE consol
