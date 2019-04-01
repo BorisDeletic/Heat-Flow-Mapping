@@ -8,8 +8,11 @@ df = pd.read_csv("data.csv", names = ['Time', 'Temp0', 'Temp1', 'Temp2', 'Temp3'
 
 df["Time"] = pd.to_datetime(df["Time"], format = "%Y-%m-%d %H:%M:%S")
 
-df["Time"] = matplotlib.dates.date2num(df["Time"])
+print(df.Time.values)
 
+
+#df["Time"] = matplotlib.dates.date2num(df["Time"])
+df["Time"] = df.Time.values
 
 
 #plt.plot_date(df["Time"], df["Temp0"])
