@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates 
 
 
-df = pd.read_csv("data.csv")
+df = pd.read_csv("data.csv", names = ['Time', 'Temp0', 'Temp1', 'Temp2', 'Temp3'])
 
 
 df["Time"] = pd.to_datetime(df["Time"], format = "%Y-%m-%d %H:%M:%S")
