@@ -3,33 +3,46 @@ import matplotlib.pyplot as plt
 import matplotlib.dates 
 
 
-df = pd.read_csv("data.csv", names = ['Time', 'Temp0', 'Temp1', 'Temp2', 'Temp3'])
+class Grapher():
+    def __init__(self, data_file):
+        data_file
+        self.df = pd.read_csv(data_file)
+
+      #  self.join_files("V_data.csv")
+
+        new_columns = ["Time"]
+        self.num_sens = len(self.df.columns)-1
+
+        for i in range(self.num_sens):
+            new_columns.append("Temp"+str(i))
+
+        self.df.columns = new_columns
+
+        self.df["Time"] = pd.to_datetime(self.df["Time"], format = "%Y-%m-%d %H:%M:%S")
+        self.plot()
 
 
-df["Time"] = pd.to_datetime(df["Time"], format = "%Y-%m-%d %H:%M:%S")
+    def plot(self):
+        fig, ax = plt.subplots()
 
-print(df.Time.values)
+        for i in range(self.num_sens):
+            ax.plot(self.df["Time"], self.df["Temp" + str(i)], label = "Sensor " + str(i))
+
+        plt.legend(loc='upper left')
+        ax.set_title("Temperature vs Time")
+        plt.ylabel("Degrees (\N{DEGREE SIGN}C)")
+        plt.show()
+
+    def join_files(self, file_tojoin):
+        ## files must have the same shape. joins file_tojoin at the end
+        df_tojoin = pd.read_csv(file_tojoin)
+
+        self.df = self.df.append(df_tojoin)
+        print(self.df)
+            
+        
 
 
-#df["Time"] = matplotlib.dates.date2num(df["Time"])
-df["Time"] = df.Time.values
-
-
-#plt.plot_date(df["Time"], df["Temp0"])
-
-fig, ax = plt.subplots()
-
-#ax.plot(df["Time"], df[["Temp0", "Temp1", "Temp2", "Temp3"]])
-ax.plot(df["Time"], df["Temp0"], label = "Sensor 1")
-ax.plot(df["Time"], df["Temp1"], label = "Sensor 2")
-ax.plot(df["Time"], df["Temp2"], label = "Sensor 3")
-ax.plot(df["Time"], df["Temp3"], label = "Sensor 4")
-
-
-plt.legend(loc='upper left')
-ax.set_title("Temperature vs Time")
-plt.ylabel("Degrees (\N{DEGREE SIGN}C)")
-plt.show()
-
+Grapher("H_data.csv")
 
 
