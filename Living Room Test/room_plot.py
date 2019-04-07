@@ -13,7 +13,7 @@ import matplotlib.animation as animation
 
 class LivingRoom():
     def __init__(self):
-        data = data_analysis.DataAnalysis("H_data.csv")
+        data = data_analysis.DataAnalysis("H_data_new.csv")
         self.df = data.df
         self.layout_room("room_layout.csv", 'sensor_layout.csv')
         self.plot2D()
