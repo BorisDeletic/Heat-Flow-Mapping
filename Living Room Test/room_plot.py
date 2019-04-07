@@ -10,6 +10,8 @@ import pandas as pd
 import re
 import matplotlib.animation as animation
 
+from datetime import datetime
+
 
 class LivingRoom():
     def __init__(self):
@@ -107,8 +109,12 @@ class LivingRoom():
     def plot2D(self):
         self.temps = np.vstack(self.df.values[:, 1:]).astype(np.float)
 
+        #remove bad readings
+        self.temps[self.temps==-127.0] = self.temps.mean()
+     #   print(self.temps[self.temps==np.nan])# = self.temps.mean()
 
-        print(self.temps)
+
+        print(self.temps.min(), self.temps.max())
         fig, ax = plt.subplots()
 
         r = np.transpose([np.linspace(1, 0.6,10)])
@@ -116,22 +122,28 @@ class LivingRoom():
         b = np.transpose([np.zeros(10)])
         colors = np.concatenate((r,g,b), axis=1)
         colormap = ListedColormap(colors)
-
         norm = plt.Normalize(self.temps.min(), self.temps.max())
-        self.sc = ax.scatter(self.sen_pos[0], self.sen_pos[1], c=self.temps[0], s=500, cmap=cm.coolwarm, norm = norm)
 
-     #   ax.scatter(self.sen_pos[0], self.sen_pos[1], c=temps, cmap = colormap, s = 400)
+        self.sc = ax.scatter(self.sen_pos[0], self.sen_pos[1], c=self.temps[0], s=500, cmap=cm.coolwarm, norm = norm)
         ax.plot(self.verts[0], self.verts[1], color = 'black')        
         
         ax.set_facecolor((0.8,0.8,0.8))
-        plt.axis('scaled')
+        fig.colorbar(self.sc, orientation='vertical')
+        
+        self.time_text = plt.text(0.02, 0.5, '', fontsize=14, transform=plt.gcf().transFigure)
+        plt.subplots_adjust(left=0.3)
 
-        dt = 50
+        dt = 10
         ani = animation.FuncAnimation(fig, self.animate, frames=range(len(self.temps)), interval = dt)
+
+        plt.axis('scaled')
         plt.show()
 
     def animate(self, i):
         self.sc.set_array(self.temps[i])
+        time = datetime.strftime(self.df.values[:,0][i], "%d - %H:%M")
+        self.time_text.set_text('time = ' + time)
+        
         
         
 

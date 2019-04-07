@@ -6,7 +6,7 @@ import matplotlib.dates
 class DataAnalysis():
     def __init__(self, data_file):
         data_file
-        self.df = pd.read_csv(data_file)
+        self.df = pd.read_csv(data_file) #, na_values=-127.0)
 
       #  self.join_files("V_data.csv")
 
@@ -27,6 +27,8 @@ class DataAnalysis():
 
     def plot(self):
         fig, ax = plt.subplots()
+
+        
 
         for i in range(self.num_sens):
             ax.plot(self.df["Time"], self.df["Temp" + str(i)], label = "Sensor " + str(i))
