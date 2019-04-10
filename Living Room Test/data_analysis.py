@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 import matplotlib.dates 
 
 
-class Grapher():
+class DataAnalysis():
     def __init__(self, data_file):
         data_file
-        self.df = pd.read_csv(data_file)
+        self.df = pd.read_csv(data_file) #, na_values=-127.0)
 
       #  self.join_files("V_data.csv")
 
@@ -19,11 +19,16 @@ class Grapher():
         self.df.columns = new_columns
 
         self.df["Time"] = pd.to_datetime(self.df["Time"], format = "%Y-%m-%d %H:%M:%S")
-        self.plot()
+        ## ^ is not the cleanest
+
+        
+        #self.plot()
 
 
     def plot(self):
         fig, ax = plt.subplots()
+
+        
 
         for i in range(self.num_sens):
             ax.plot(self.df["Time"], self.df["Temp" + str(i)], label = "Sensor " + str(i))
@@ -42,7 +47,7 @@ class Grapher():
             
         
 
-
-Grapher("H_data.csv")
-
+if __name__ == "__main__":
+    data = DataAnalysis("H_data.csv")
+    data.plot()
 

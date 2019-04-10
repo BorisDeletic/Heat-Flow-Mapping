@@ -1,6 +1,6 @@
 TODO List:
 
-Buy Gaffa tape
+
 Buy Heatshrink (>5mm but <10mm)
 Buy 4.7k ohm Resistor x10 (at least)
-Investigate non-arduino RAM storage (flash / USB)
+
